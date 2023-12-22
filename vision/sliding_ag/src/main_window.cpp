@@ -113,8 +113,8 @@ void MainWindow::slotUpdateImg()
   ui.yellow->setPixmap(QPixmap::fromImage(yellow_QImage));
 
   //빨간색 선 이미지(red_img) :
-  int red_HSV_value[6] = { 0, img, 0, 10, 255, 255 };   // low h, low s, low v, high h, high s, high v
-  cv::Mat red_img = Binary(cloneImage, red_HSV_value);  // 빨간색 선 이진
+  int red_HSV_value[6] = { 0, 80, 0, 10, 255, 255 };   // low h, low s, low v, high h, high s, high v
+  cv::Mat red_img = Binary(img, red_HSV_value);  // 빨간색 선 이진
   int red_ROI_value[8] = { 0, 100, 480, 100, 480, 0, 0, 0 };  // 좌측 하단 꼭지점, 우측 하단 꼭지점, 우측 상단 꼭지점,
                                                               // 좌측 상단 꼭지점
   // cv::Mat rroi = region_of_interest(red_img, red_ROI_value);  // 빨간색 관심 영역 설정
@@ -484,7 +484,7 @@ void MainWindow::Mani()
 void MainWindow::Auto()
 {
   mani_auto_flag = 0;
-  pantilt();
+  //pantilt();
 }
 
 void MainWindow::autorace_go()
