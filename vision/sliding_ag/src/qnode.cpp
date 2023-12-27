@@ -54,7 +54,7 @@ bool QNode::init()
 
   image_transport::ImageTransport image(n);
   subImage = image.subscribe("/usb_cam/image_raw", 1, &QNode::callbackImage, this);
-  //subJoy = n.subscribe("/hello", 100, &QNode::callbackJoy, this);
+  sub_vel = n.subscribe("/hello", 100, &QNode::callbackJoy, this);
 
   // autorace->로봇 제어 명령을 보낼 퍼블리셔 생성
   init_pub = n.advertise<std_msgs::Bool>("init_pub", 10);
@@ -62,6 +62,7 @@ bool QNode::init()
   cmd_vel_pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
   wheel_pub = n.advertise<tutorial_msgs::mydmxel>("/bye",1000);
+  mode_flag = n.advertise<std_msgs::Int32>("/mode", 10);
 
   start();
   return true;
@@ -101,5 +102,13 @@ void QNode::callbackImage(const sensor_msgs::ImageConstPtr& msg_img)
     }
   }
 }
-//void QNode::callbackJoy(const tutorial_msgs::mydmxelConstPtr& msg){}
+
+void QNode::callbackJoy(const tutorial_msgs::mydmxelConstPtr& msg)
+{
+  angle1 = msg->motor1;
+  angle2 = msg->motor2;
+  angle3 = msg->motor3;
+  angle4 = msg->motor4;
+  angle5 = msg->motor5;
+}
 }  // namespace sliding

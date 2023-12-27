@@ -28,9 +28,11 @@
 #include <sensor_msgs/Image.h>
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
+#include <tutorial_msgs/mydmxel.h>
 
 /*****************************************************************************
 ** Namespaces
@@ -56,19 +58,28 @@ public:
   bool isreceived = false;
 
   image_transport::Subscriber subImage;
-  //ros::Subscriber subJoy;
+
+  ros::Subscriber sub_vel;
   
   std_msgs::Bool boolval;
   geometry_msgs::Point pointval;
   geometry_msgs::Twist twist;
 
+  int angle1;  //초기값 입력
+  int angle2;
+  int angle3;
+  int angle4;
+  int angle5;
+
   ros::Publisher init_pub;
   ros::Publisher pantilt_pub;
   ros::Publisher cmd_vel_pub;
   ros::Publisher wheel_pub;
-  
+  ros::PUblisher mode_flag;
+
+
   void callbackImage(const sensor_msgs::ImageConstPtr& msg_img);
-  //void callbackJoy(const tutorial_msgs::mydmxelConstPtr& msg);
+  void callbackJoy(const tutorial_msgs::mydmxelConstPtr& msg);
 
 
 Q_SIGNALS:

@@ -466,8 +466,8 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>70</y>
+      <x>-10</x>
+      <y>60</y>
       <width>1481</width>
       <height>661</height>
      </rect>
@@ -922,7 +922,7 @@ color: rgb(238, 238, 236);</string>
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -1226,7 +1226,7 @@ p, li { white-space: pre-wrap; }
         <x>1050</x>
         <y>100</y>
         <width>231</width>
-        <height>72</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -1265,7 +1265,7 @@ p, li { white-space: pre-wrap; }
         <x>1050</x>
         <y>140</y>
         <width>231</width>
-        <height>72</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -1304,7 +1304,7 @@ p, li { white-space: pre-wrap; }
         <x>1050</x>
         <y>180</y>
         <width>231</width>
-        <height>72</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -1343,7 +1343,7 @@ p, li { white-space: pre-wrap; }
         <x>1050</x>
         <y>220</y>
         <width>231</width>
-        <height>72</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -1382,7 +1382,7 @@ p, li { white-space: pre-wrap; }
         <x>1050</x>
         <y>260</y>
         <width>301</width>
-        <height>72</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_7">

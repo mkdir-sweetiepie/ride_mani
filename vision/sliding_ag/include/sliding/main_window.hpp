@@ -59,11 +59,7 @@ public:
   int y;
   
   int mani_auto_flag = 1;
-  int angle1 = 0;  //초기값 입력
-  int angle2 = 0;
-  int angle3 = 0;
-  int angle4 = 0;
-  int angle5 = 0;
+
 
   void Find_Binary_img(cv::Mat& cloneImage);
 
@@ -86,6 +82,7 @@ public:
 
 public Q_SLOTS:
   void slotUpdateImg();
+
   void Mani();
   void Auto();
 

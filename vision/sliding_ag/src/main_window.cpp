@@ -37,9 +37,11 @@ MainWindow::MainWindow(int argc, char** argv, QWidget* parent) : QMainWindow(par
   QObject::connect(&qnode, SIGNAL(rosShutdown()), this, SLOT(close()));
   // subscribe한 이미지의 callback에서 시그널을 발생시켜 위 함수를 부른다.
   QObject::connect(&qnode, SIGNAL(sigRcvImg()), this, SLOT(slotUpdateImg()));
+  QObject::connect(&qnode, SIGNAL(callbackJoy()), this, SLOT(display_view()));
 
   QObject::connect(ui.manipulation, SIGNAL(clicked()), this, SLOT(Mani()));
   QObject::connect(ui.autorace, SIGNAL(clicked()), this, SLOT(Auto()));
+
 }
 
 MainWindow::~MainWindow()
@@ -172,12 +174,12 @@ void MainWindow::slotUpdateImg()
       qnode.rrpm=10;
       }
   }
-  // if(pantilt_start == 0)
-  // {
-  //   qnode.boolval.data = true;
-  //   qnode.init_pub.publish(qnode.boolval);
-  //   pantilt_start =1;
-  // }
+  if(pantilt_start == 0)
+  {
+    qnode.boolval.data = true;
+    qnode.init_pub.publish(qnode.boolval);
+    pantilt_start =1;
+  }
   
   display_view();
 
@@ -524,11 +526,11 @@ void MainWindow::trimAndSaveImage(const cv::Mat& image, const std::vector<cv::Po
  *****************************************************************************/
 void MainWindow::display_view()
 {
-  ui.m_1->display(angle1);
-  ui.m_2->display(angle2);
-  ui.m_3->display(angle3);
-  ui.m_4->display(angle4);
-  ui.m_5->display(angle5);
+  ui.m_1->display(qnode.angle1);
+  ui.m_2->display(qnode.angle2);
+  ui.m_3->display(qnode.angle3);
+  ui.m_4->display(qnode.angle4);
+  ui.m_5->display(qnode.angle5);
   
   ui.lrpm->display(qnode.lrpm);
   ui.rrpm->display(qnode.rrpm);
@@ -555,14 +557,6 @@ void MainWindow::pantilt()
     pantilt_flag = 0;
     sign_end_flag = 0;
     pantilt_start =0;
-    cnt = 0;
-    x =0;
-    y =0;
-    angle1 = 0;  //초기값 입력
-    angle2 = 0;
-    angle3 = 0;
-    angle4 = 0;
-    angle5 = 0;
   }
   else if(pantilt_flag == 1) //차선, 표지판 둘다 값 없음
   {
@@ -574,12 +568,14 @@ void MainWindow::pantilt()
 void MainWindow::Mani()
 {
   mani_auto_flag = 1;
-   pantilt();
+  qnode.mode_flag.publish(mani_auto_flag);
+  pantilt();
 }
 void MainWindow::Auto()
 {
   mani_auto_flag = 0;
-   pantilt();
+  qnode.mode_flag.publish(mani_auto_flag);
+  pantilt();
 }
 
 }  // namespace sliding
